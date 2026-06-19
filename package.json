@@ -1,6 +1,6 @@
 {
   "name": "@ikrbasak/adrin",
-  "version": "0.0.0-rc.4",
+  "version": "0.0.1",
   "description": "ADR (Architecture Decision Record) management CLI",
   "homepage": "https://github.com/ikrbasak/adrin#readme",
   "bugs": {
