@@ -2,13 +2,23 @@
   "name": "@ikrbasak/adrin",
   "version": "0.0.1",
   "description": "ADR (Architecture Decision Record) management CLI",
+  "keywords": [
+    "adr",
+    "architecture",
+    "architecture-decision-record",
+    "cli",
+    "decision-record",
+    "documentation",
+    "markdown",
+    "tui"
+  ],
   "homepage": "https://github.com/ikrbasak/adrin#readme",
   "bugs": {
     "url": "https://github.com/ikrbasak/adrin/issues"
   },
   "license": "MIT",
   "author": "Krishna Basak <ikrbasak@gmail.com>",
-  "maintainers": [
+  "contributors": [
     "Mukilan S <mukilans232003@gmail.com>"
   ],
   "repository": {
