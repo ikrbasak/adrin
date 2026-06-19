@@ -36,8 +36,10 @@ Files are named `0001-title-slug.md`.
 
 ### `adrin new <title>`
 
-Creates an ADR with the next available number and a minimal body prompting you
-to phrase the decision as a [Y-statement](https://medium.com/olzzio/y-statements-10eb07b5a177).
+Creates an ADR with the next available number and a structured
+[Y-statement](https://medium.com/olzzio/y-statements-10eb07b5a177) body —
+**Context** (requirement, decision drivers, KPIs), **Options considered**, and
+**Decision** (chosen option, rationale, and consequences).
 
 ```bash
 adrin new "Adopt event-driven architecture"

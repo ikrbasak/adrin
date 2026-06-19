@@ -124,7 +124,38 @@ export function serialize(data: AdrFrontmatter, body: string): string {
 }
 
 function template(): string {
-  return "Formulate this ADR as a Y-statement — see https://medium.com/olzzio/y-statements-10eb07b5a177";
+  return [
+    "<!-- A structured Y-statement: capture the why before the what.",
+    "     See https://medium.com/olzzio/y-statements-10eb07b5a177 -->",
+    "",
+    "## Context",
+    "",
+    "<!-- The business requirement driving a technical decision, framed within",
+    "     this application (or application area). Spell out the decision drivers,",
+    "     constraints, and the KPIs / qualities we are optimizing for. -->",
+    "",
+    "In the context of <use case / application area>, facing <concern or requirement>.",
+    "",
+    "## Options considered",
+    "",
+    "<!-- Each option we genuinely assessed, with a one- or two-line description",
+    "     and its notable trade-offs. -->",
+    "",
+    "- **<Option A>** — <what it is, and its trade-offs>",
+    "- **<Option B>** — <what it is, and its trade-offs>",
+    "",
+    "## Decision",
+    "",
+    "<!-- The option we chose, why it wins over the alternatives, and the",
+    "     consequences we accept as a result. -->",
+    "",
+    "We decided for **<chosen option>** to achieve <quality / KPI>, accepting <downside>.",
+    "",
+    "Consequences:",
+    "",
+    "- <what becomes easier or better>",
+    "- <what becomes harder, or the cost we take on>",
+  ].join("\n");
 }
 
 export const STATUSES: readonly AdrStatus[] = [
