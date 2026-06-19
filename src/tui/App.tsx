@@ -139,7 +139,10 @@ export function App({ adrs }: AppProps) {
             // Pre-truncate to the visible width (pane minus border, padding and
             // the status dot) so wrapping the label in an OSC 8 file:// link
             // can't have its closing escape clipped. cmd/ctrl-click opens it.
-            const label = fileLink(adr.path, truncate(`${pad(adr.number)} ${adr.data.title}`, LIST_WIDTH - 6));
+            const label = fileLink(
+              adr.path,
+              truncate(`${pad(adr.number)} ${adr.data.title}`, LIST_WIDTH - 6),
+            );
             return (
               <Text key={adr.number} inverse={isSel} wrap="truncate-end">
                 <Text color={color}>{"● "}</Text>
