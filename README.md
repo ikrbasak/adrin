@@ -44,7 +44,7 @@ adrin new "Adopt event-driven architecture"
 ```
 
 New ADRs default to status `processing`. Pick a different initial status with
-`-S, --status` (`accepted` · `processing` · `deferred` · `superseded`):
+`-S, --status` (`accepted` · `processing` · `deprecated` · `rejected` · `superseded`):
 
 ```bash
 adrin new -S accepted "Adopt event-driven architecture"
@@ -82,8 +82,8 @@ status: <status> (Superseded by XXXX on <date>)
 <content>
 ```
 
-Status colors: `accepted` green · `processing` cyan · `deferred` yellow ·
-`superseded` red.
+Status colors: `accepted` green · `processing` cyan · `deprecated` yellow ·
+`rejected` red · `superseded` red.
 
 When stdout isn't a TTY (piped or CI), `view` prints a plain list instead.
 
@@ -103,7 +103,7 @@ Each ADR is Markdown with a YAML frontmatter block:
 ---
 title: <title>
 date: <YYYY-MM-DD>
-status: accepted | processing | deferred | superseded
+status: accepted | processing | deprecated | rejected | superseded
 supersedes: N # only when this ADR supersedes another
 superseded_by: X # only when another ADR supersedes this one
 ---

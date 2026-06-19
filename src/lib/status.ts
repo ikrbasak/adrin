@@ -5,7 +5,8 @@ import type { AdrStatus } from "@/lib/adr";
 export const STATUS_COLOR: Record<AdrStatus, string> = {
   accepted: "green",
   processing: "cyan",
-  deferred: "yellow",
+  deprecated: "yellow",
+  rejected: "red",
   superseded: "red",
 };
 

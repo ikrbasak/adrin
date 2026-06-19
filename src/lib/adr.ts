@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 export const DEFAULT_DIR = "docs/adr";
 
-export type AdrStatus = "accepted" | "processing" | "deferred" | "superseded";
+export type AdrStatus = "accepted" | "processing" | "deprecated" | "rejected" | "superseded";
 
 export interface AdrFrontmatter {
   title: string;
@@ -127,7 +127,13 @@ function template(): string {
   return "Formulate this ADR as a Y-statement — see https://medium.com/olzzio/y-statements-10eb07b5a177";
 }
 
-export const STATUSES: readonly AdrStatus[] = ["accepted", "processing", "deferred", "superseded"];
+export const STATUSES: readonly AdrStatus[] = [
+  "accepted",
+  "processing",
+  "deprecated",
+  "rejected",
+  "superseded",
+];
 
 export const DEFAULT_STATUS: AdrStatus = "processing";
 
