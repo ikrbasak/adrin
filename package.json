@@ -1,6 +1,6 @@
 {
   "name": "@ikrbasak/adrin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ADR (Architecture Decision Record) management CLI",
   "keywords": [
     "adr",
