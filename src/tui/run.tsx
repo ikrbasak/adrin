@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "ink";
 import type { Adr } from "@/lib/adr";
 import { App } from "@/tui/App";

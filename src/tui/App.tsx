@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Box, Text, useApp, useInput, useStdin, useStdout } from "ink";
 import wrapAnsi from "wrap-ansi";
 import type { Adr } from "@/lib/adr";
