@@ -34,6 +34,9 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Lint
+        run: pnpm lint
+
       # No NODE_AUTH_TOKEN needed: OIDC trusted publishing authenticates via the
       # id-token permission above and attaches provenance automatically.
       - name: Publish to npm
