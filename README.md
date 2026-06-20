@@ -46,19 +46,21 @@ adrin new "Adopt event-driven architecture"
 ```
 
 New ADRs default to status `processing`. Pick a different initial status with
-`-S, --status` (`accepted` · `processing` · `deprecated` · `rejected` · `superseded`):
+`-s, --status` (`accepted` · `processing` · `deprecated` · `rejected` · `superseded`):
 
 ```bash
-adrin new -S accepted "Adopt event-driven architecture"
+adrin new -s accepted "Adopt event-driven architecture"
 ```
 
 #### Superseding an existing ADR
 
 ```bash
-adrin new -s 1 "Switch primary datastore to DynamoDB"
+adrin new -r 1 "Switch primary datastore to DynamoDB"
 ```
 
-The new ADR records `supersedes: 1`. ADR `0001` is updated in place — its status
+The `-r, --replaces` flag (alias `--supersedes`) takes the number of the ADR
+being replaced. The new
+ADR records `supersedes: 1`. ADR `0001` is updated in place — its status
 flips to `superseded`, it gains `superseded_by: <new>`, and a note linking the
 replacement is prepended to its body. Supersession stays bidirectional and
 discoverable from either record.
@@ -89,12 +91,12 @@ Status colors: `accepted` green · `processing` cyan · `deprecated` yellow ·
 
 When stdout isn't a TTY (piped or CI), `view` prints a plain list instead.
 
-### `adrin view -e <number>`
+### `adrin view <number>`
 
 Renders a single ADR to stdout — handy for piping or quick inspection.
 
 ```bash
-adrin view -e 1
+adrin view 1
 ```
 
 ## File format

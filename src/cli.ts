@@ -40,32 +40,37 @@ program
   .description("Create a new ADR with an auto-incremented number")
   .argument("<title>", "title of the ADR")
   .option(
-    "-s, --supersedes <number>",
-    "number of the ADR this one supersedes",
-    toInt("--supersedes"),
-  )
-  .option(
-    "-S, --status <status>",
+    "-s, --status <status>",
     `initial status (${STATUSES.join(" | ")})`,
     toStatus,
     DEFAULT_STATUS,
   )
+  .option("-r, --replaces <number>", "number of the ADR this one replaces", toInt("--replaces"))
+  .option("--supersedes <number>", "alias for --replaces", toInt("--supersedes"))
   .option("-d, --dir <dir>", "ADR directory")
   .action(
-    async (title: string, opts: { supersedes?: number; status: AdrStatus; dir?: string }, cmd) => {
+    async (
+      title: string,
+      opts: { replaces?: number; supersedes?: number; status: AdrStatus; dir?: string },
+      cmd,
+    ) => {
       const dir = opts.dir ?? cmd.optsWithGlobals().dir ?? DEFAULT_DIR;
-      await runNew(title, { dir, supersedes: opts.supersedes, status: opts.status });
+      await runNew(title, {
+        dir,
+        supersedes: opts.replaces ?? opts.supersedes,
+        status: opts.status,
+      });
     },
   );
 
 program
   .command("view")
-  .description("Browse ADRs in a TUI, or print a single entry with -e")
-  .option("-e, --entry <number>", "view a specific ADR entry by number", toInt("--entry"))
+  .description("Browse ADRs in a TUI, or print a single entry by number")
+  .argument("[number]", "view a specific ADR entry by number", toInt("number"))
   .option("-d, --dir <dir>", "ADR directory")
-  .action(async (opts: { entry?: number; dir?: string }, cmd) => {
+  .action(async (entry: number | undefined, opts: { dir?: string }, cmd) => {
     const dir = opts.dir ?? cmd.optsWithGlobals().dir ?? DEFAULT_DIR;
-    await runView({ dir, entry: opts.entry });
+    await runView({ dir, entry });
   });
 
 program.parseAsync(process.argv).catch((err: unknown) => {
