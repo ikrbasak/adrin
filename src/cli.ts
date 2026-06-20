@@ -1,9 +1,14 @@
 #!/usr/bin/env node
+import { readFileSync } from "node:fs";
 import { Command } from "commander";
 import chalk from "chalk";
 import { DEFAULT_DIR, DEFAULT_STATUS, STATUSES, type AdrStatus } from "@/lib/adr";
 import { runNew } from "@/commands/new";
 import { runView } from "@/commands/view";
+
+const { version } = JSON.parse(
+  readFileSync(new URL("../package.json", import.meta.url), "utf8"),
+) as { version: string };
 
 function toInt(label: string) {
   return (value: string): number => {
@@ -27,7 +32,7 @@ const program = new Command();
 program
   .name("adrin")
   .description("Architecture Decision Record (ADR) manager")
-  .version("0.1.0")
+  .version(version)
   .option("-d, --dir <dir>", "ADR directory", DEFAULT_DIR);
 
 program
