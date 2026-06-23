@@ -9,15 +9,15 @@
 Run it on demand with no install:
 
 ```bash
-npx adrin --help
+npx @ikrbasak/adrin --help
 ```
 
 Or install it globally:
 
 ```bash
-npm install -g adrin
-# pnpm add -g adrin
-# yarn global add adrin
+npm install -g @ikrbasak/adrin
+# pnpm add -g @ikrbasak/adrin
+# yarn global add @ikrbasak/adrin
 ```
 
 Requires **Node.js 22+**.
