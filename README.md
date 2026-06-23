@@ -75,6 +75,7 @@ on the left, the rendered ADR on the right.
 | `↑` / `↓` or `j` / `k`    | move selection / scroll content (depends on focus) |
 | `Tab` / `←` / `→`         | switch focus between the list and content panes    |
 | `Space` / `PgUp` / `PgDn` | page the content                                   |
+| `r`                       | reload from disk (picks up newly added ADRs)       |
 | `q`                       | quit                                               |
 
 Each entry renders as:

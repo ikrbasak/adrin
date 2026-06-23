@@ -9,10 +9,10 @@ const MOUSE_ON = "\x1b[?1000h\x1b[?1006h";
 /** Disable mouse reporting again. */
 const MOUSE_OFF = "\x1b[?1000l\x1b[?1006l";
 
-export async function runTui(adrs: Adr[]): Promise<void> {
+export async function runTui(adrs: Adr[], dir: string): Promise<void> {
   process.stdout.write(CLEAR);
   process.stdout.write(MOUSE_ON);
-  const { waitUntilExit } = render(<App adrs={adrs} />);
+  const { waitUntilExit } = render(<App adrs={adrs} dir={dir} />);
   try {
     await waitUntilExit();
   } finally {

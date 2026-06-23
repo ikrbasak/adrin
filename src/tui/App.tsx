@@ -2,12 +2,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Box, Text, useApp, useInput, useStdin, useStdout } from "ink";
 import wrapAnsi from "wrap-ansi";
 import type { Adr } from "@/lib/adr";
-import { pad } from "@/lib/adr";
+import { listAdrs, pad } from "@/lib/adr";
 import { renderAdr } from "@/lib/render";
 import { STATUS_COLOR } from "@/lib/status";
 
 interface AppProps {
   adrs: Adr[];
+  /** Directory the ADRs were loaded from, so `r` can reload from disk. */
+  dir: string;
 }
 
 type Focus = "list" | "content";
@@ -26,10 +28,11 @@ function fileLink(path: string, text: string): string {
   return `\x1b]8;;file://${path}\x07${text}\x1b]8;;\x07`;
 }
 
-export function App({ adrs }: AppProps) {
+export function App({ adrs: initialAdrs, dir }: AppProps) {
   const { exit } = useApp();
   const { stdout } = useStdout();
   const { stdin } = useStdin();
+  const [adrs, setAdrs] = useState(initialAdrs);
   const [selected, setSelected] = useState(0);
   const [scroll, setScroll] = useState(0);
   const [focus, setFocus] = useState<Focus>("list");
@@ -53,6 +56,23 @@ export function App({ adrs }: AppProps) {
   }, [current, adrs, contentWidth]);
 
   const maxScroll = Math.max(0, contentLines.length - viewport);
+
+  // Keep the scroll offset valid when the content shrinks — after a reload or a
+  // terminal resize the previous offset may now sit past the end.
+  useEffect(() => {
+    setScroll((s) => Math.min(s, maxScroll));
+  }, [maxScroll]);
+
+  // Re-read the ADRs from disk: picks up entries added since launch and, via the
+  // re-render, recomputes the viewport against the current terminal size. The
+  // selection sticks to the same ADR number when it still exists.
+  async function reload(): Promise<void> {
+    const keep = adrs[selected]?.number;
+    const fresh = await listAdrs(dir);
+    setAdrs(fresh);
+    const idx = keep != null ? fresh.findIndex((a) => a.number === keep) : -1;
+    setSelected(idx >= 0 ? idx : Math.min(selected, Math.max(0, fresh.length - 1)));
+  }
 
   // Refs keep the stdin listener stable while still reading current values.
   const focusRef = useRef(focus);
@@ -95,6 +115,10 @@ export function App({ adrs }: AppProps) {
     }
     if (key.tab || key.leftArrow || key.rightArrow) {
       setFocus((f) => (f === "list" ? "content" : "list"));
+      return;
+    }
+    if (input === "r") {
+      void reload();
       return;
     }
 
@@ -178,7 +202,7 @@ export function App({ adrs }: AppProps) {
           {focus === "list" ? `  •  ↵ read` : `  •  Esc back`}
           {`  •  Tab/←/→ switch pane`}
           {maxScroll > 0 ? `  •  ${scroll}/${maxScroll}` : ""}
-          {`  •  q quit`}
+          {`  •  r reload  •  q quit`}
         </Text>
       </Box>
     </Box>

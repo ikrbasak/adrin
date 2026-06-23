@@ -38,5 +38,5 @@ export async function runView(opts: ViewOptions): Promise<void> {
   }
 
   const { runTui } = await import("@/tui/run");
-  await runTui(adrs);
+  await runTui(adrs, opts.dir);
 }
