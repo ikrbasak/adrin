@@ -46,9 +46,9 @@
     "lint": "oxfmt && publint"
   },
   "dependencies": {
+    "@11ty/gray-matter": "^2.1.0",
     "chalk": "^5.6.2",
     "commander": "^15.0.0",
-    "gray-matter": "^4.0.3",
     "ink": "^7.1.0",
     "react": "^19.2.7",
     "wrap-ansi": "^10.0.0"
